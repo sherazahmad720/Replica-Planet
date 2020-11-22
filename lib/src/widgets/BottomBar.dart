@@ -2,6 +2,8 @@ import 'package:karobar/main.dart';
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:karobar/src/pages/Homepage.dart';
+import 'package:karobar/src/pages/Categories.dart';
+import 'package:karobar/src/pages/CategoryPage.dart';
 
 class BottomNav extends StatefulWidget {
   @override
@@ -25,7 +27,7 @@ class _BottomNavState extends State<BottomNav> {
 
   final List<Widget> _pages = [
     HomePage(),
-    Text("2"),
+    Body(),
     Text("2"),
     Text("2"),
   ];

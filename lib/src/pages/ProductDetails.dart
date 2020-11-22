@@ -2,11 +2,14 @@ import 'package:karobar/main.dart';
 import 'Homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:karobar/src/widgets/slider.dart';
+import 'package:karobar/src/models/User.dart';
 
 class ProductDetails extends StatefulWidget {
+  Product product;
   String rating, prodid, prodname, prodPrice, proddescription;
   ProductDetails(
-      {this.prodPrice,
+      {this.product,
+      this.prodPrice,
       this.proddescription,
       this.prodid,
       this.prodname,
