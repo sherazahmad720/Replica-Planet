@@ -8,6 +8,7 @@ import 'package:karobar/src/widgets/CustomTextField.dart';
 import 'package:karobar/src/widgets/EmailValidator.dart';
 import 'package:karobar/src/widgets/FilledButton.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:async/src/';
 
 // ya folder lib k andr he rkhny hty  ya bahir ?sai hen yeh ok

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
-  CustomTextField(
-      {this.icon,
+class CustomTextFieldSearch extends StatelessWidget {
+  CustomTextFieldSearch(
+      {this.prefixicon,
+      this.icon,
       this.hint,
       this.obsecure = false,
       this.validator,
       this.onSaved});
   final FormFieldSetter<String> onSaved;
-
+  final Icon prefixicon;
   final Icon icon;
   final String hint;
   final bool obsecure;
@@ -49,6 +50,13 @@ class CustomTextField extends StatelessWidget {
               child: icon,
             ),
             padding: EdgeInsets.only(left: 30, right: 10),
+          ),
+          suffixIcon: Padding(
+            padding: EdgeInsets.only(left: 30, right: 10),
+            child: IconTheme(
+              data: IconThemeData(color: Color(0xFF675B5B)),
+              child: prefixicon,
+            ),
           ),
         ),
       ),
