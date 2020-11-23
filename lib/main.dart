@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:karobar/src/widgets/mainScreen.dart';
+import 'package:karobar/mainScreen.dart';
 // import 'package:karobar/src/widgets/IntroductionScreen.dart';
 // import 'src/pages/login.dart';
 // import 'package:karobar/src/pages/Signup.dart';

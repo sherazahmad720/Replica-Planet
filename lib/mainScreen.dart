@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:karobar/src/pages/Homepage.dart';
+// import 'package:karobar/src/pages/Categories.dart';
+import 'package:karobar/src/pages/CategoryPage.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -24,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     HomePage(),
-    Text("2"),
+    Body(),
     Text("2"),
     Text("2"),
   ];
@@ -55,7 +57,7 @@ class _MainScreenState extends State<MainScreen> {
                 Icons.dashboard,
                 color: Colors.red,
               ),
-              title: Text("Home")),
+              title: Text("Products")),
           BubbleBottomBarItem(
               backgroundColor: Colors.deepPurple,
               icon: Icon(
@@ -66,7 +68,7 @@ class _MainScreenState extends State<MainScreen> {
                 Icons.access_time,
                 color: Colors.deepPurple,
               ),
-              title: Text("Logs")),
+              title: Text("Categories")),
           BubbleBottomBarItem(
               backgroundColor: Colors.indigo,
               icon: Icon(

@@ -51,6 +51,7 @@ class _BannersState extends State<Banners> {
                   ),
                 );
               },
+              //apky pc ki bhi ati hy hahaha // vo kysy any desk p share hoti hy na
               slideTransform: CubeTransform(rotationAngle: 0),
               slideIndicator: CircularSlideIndicator(
                 padding: EdgeInsets.only(top: 32),

@@ -100,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: CustomTextField(
                         onSaved: (input) {
                           _email = input;
+                          print(_email);
                         },
                         validator: emailValidator,
                         icon: Icon(Icons.email),
@@ -110,7 +111,10 @@ class _LoginPageState extends State<LoginPage> {
                       child: CustomTextField(
                         icon: Icon(Icons.lock),
                         obsecure: true,
-                        onSaved: (input) => _password = input,
+                        onSaved: (input) {
+                          print(_password);
+                          return _password = input;
+                        },
                         validator: (input) =>
                             input.isEmpty ? "*Required" : null,
                         hint: "PASSWORD",

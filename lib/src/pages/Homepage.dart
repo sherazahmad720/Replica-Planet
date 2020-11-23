@@ -1,16 +1,14 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:karobar/main.dart';
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-// import 'package:karobar/src/pages/SeeMore.dart';
-// import 'package:karobar/src/widgets/CustomFieldSearch.dart';
-// import 'package:karobar/src/widgets/CustomTextField.dart';
-// import 'package:carousel_slider/carousel_slider.dart';
+import 'package:karobar/src/controllers/home_controller.dart';
+import 'package:karobar/src/pages/ItemCard.dart';
+import 'package:karobar/src/widgets/item_card.dart';
+
 import 'package:karobar/src/widgets/slider.dart';
-import 'package:karobar/src/models/User.dart';
-// import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
-// import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:karobar/src/models/product_model.dart';
+
 import 'ProductDetails.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,235 +17,228 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  // void initState() {
+
+  // }
+  // HomeController homeC = Get.put(HomeController());
   var rating = 3.0;
-  String _search;
+  // String _search;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Icon(Icons.access_time),
-        backgroundColor: Colors.white,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {},
-          ),
-          IconButton(
-              onPressed: () {}, icon: FaIcon(FontAwesomeIcons.shoppingCart))
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            // Padding(
-            //     padding: EdgeInsets.only(top: 10),
-            //     child: CustomTextFieldSearch(
-            //       onSaved: (input) {
-            //         _search = input;
-            //       },
-            //       icon: Icon(Icons.email),
-            //       hint: "Search",
-            //       prefixicon: Icon(Icons.access_alarm),
-            //     )),
-            SizedBox(
-              height: 15,
-            ),
-            Banners(),
-            SizedBox(
-              height: 15,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        height: 100,
-                        width: 100,
-                        child: ListView.builder(
-                          itemCount: products.length,
-                          itemBuilder: (ctx, i) {
-                            return Container(
-                              width: 20,
-                              height: 20,
-                              child: Text('${products[i].title}'),
-                              // decoration: BoxDecoration(
-                              //     image: DecorationImage(
-                              //         image: NetworkImage(
-                              //             "${products[i].image}"))),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "See More",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "New Arrival",
-                    style: TextStyle(fontSize: 20, color: Color(0xff707070)),
+    return GetBuilder<HomeController>(
+        init: HomeController(),
+        builder: (_) {
+          return Scaffold(
+              appBar: AppBar(
+                leading: Icon(Icons.access_time),
+                backgroundColor: Colors.white,
+                actions: [
+                  IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {},
                   ),
                   IconButton(
-                    icon: Icon(Icons.arrow_forward, color: Color(0xff707070)),
-                    onPressed: () {
-                      return null;
-                    },
-                  )
+                      onPressed: () {},
+                      icon: FaIcon(FontAwesomeIcons.shoppingCart))
                 ],
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 300,
-                    width: 330,
-                    child: ListView.builder(
-                      // reverse: true,
-                      // scrollDirection: Axis.horizontal,
-                      itemCount: 2,
-                      itemBuilder: (ctx, i) {
-                        return GestureDetector(
-                          onTap: () {
-                            // Get.to(ProductDetails(
-                            //     rating: rating.toString(),
-                            //     prodid: products[i].id.toString(),
-                            //     prodname: products[i].title,
-                            //     prodPrice: products[i].price.toString(),
-                            //     proddescription: products[i].description));
-                          },
-                          child: Container(
-                            width: 138,
-                            // height: 166,
-                            child: Card(
-                              color: Color(0XFF3D81AF),
-                              elevation: 10.0,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    height: 114,
-                                    width: 138,
-                                    child: Hero(
-                                        tag: '${products[i].id}',
-                                        child: Image.asset(products[i].image)),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(top: 10),
-                                          child: Text("${products[i].title}",
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold)),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: SmoothStarRating(
-                                          rating: rating,
-                                          isReadOnly: false,
-                                          size: 15,
-                                          filledIconData: Icons.star,
-                                          halfFilledIconData: Icons.star_half,
-                                          defaultIconData: Icons.star_border,
-                                          starCount: 5,
-                                          allowHalfRating: true,
-                                          spacing: 2.0,
-                                          onRated: (value) {
-                                            print("rating value -> $value");
-                                            // print("rating value dd -> ${value.truncate()}");
-                                          },
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "{products[i].description}",
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      // fontWeight: FontWeight.bold
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "\$${products[i].price}",
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                      Text(
-                                        "\$${products[i].price}",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            decoration:
-                                                TextDecoration.lineThrough),
-                                      ),
-                                      IconButton(
-                                        icon: Icon(Icons.favorite),
-                                        onPressed: () {
-                                          return null;
-                                        },
-                                      ),
-                                      IconButton(
-                                        icon:
-                                            Icon(Icons.shopping_cart_outlined),
-                                        onPressed: () {
-                                          return null;
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+              body: SingleChildScrollView(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                    //whatsapp bhi check kar leta banda
+                    // Padding(
+                    //     padding: EdgeInsets.only(top: 10),
+                    //     child: CustomTextFieldSearch(
+                    //       onSaved: (input) {
+                    //         _search = input;
+                    //       },
+                    //       icon: Icon(Icons.email),
+                    //       hint: "Search",
+                    //       prefixicon: Icon(Icons.access_alarm),
+                    //     )),
+                    SizedBox(
+                      height: 15,
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+                    Banners(),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Center(
+                      child: Text(
+                        "Categories",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 200,
+                      width: MediaQuery.of(context).size.width,
+                      child: ListView.builder(
+                        itemCount: _.categoryList.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (ctx, i) {
+                          return Padding(
+                            padding: EdgeInsets.only(left: 20),
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  child: Container(
+                                    //whats app p bhi dehan do zara
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/images/bag_1.png"))),
+                                    height: 200,
+                                    width: 200,
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 120,
+                                  left: 4,
+                                  right: 0,
+                                  bottom: 0,
+                                  child: Text(
+                                    _.categoryList[i].name,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 155,
+                                  left: 30,
+                                  right: 0,
+                                  bottom: 0,
+                                  child: Text("Shop now"),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "See More",
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Hot Sale",
+                            style: TextStyle(
+                                fontSize: 20, color: Color(0xff707070)),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.arrow_forward,
+                                color: Color(0xff707070)),
+                            onPressed: () {
+                              return null;
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    //is pory ko bhi baad main widget bnana hy tek hy na
+                    //ok h
+                    Container(
+                      height: 260,
+                      width: MediaQuery.of(context).size.width,
+                      child: ListView.builder(
+                          itemCount: _.hoteSaleList.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (ctx, i) {
+                            return InkWell(
+                                onTap: () {
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => ProductDetails(
+                                  //               product: products[i],
+                                  //             )));
+                                },
+                                child: ItemCardMain(
+                                  description: "abc des",
+                                  imgPath: "assets/images/bag_1.png",
+                                  name: _.hoteSaleList[i].title,
+                                  price: "100",
+                                  rating: 2,
+                                ));
+                          }),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "New Arrival",
+                            style: TextStyle(
+                                fontSize: 20, color: Color(0xff707070)),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.arrow_forward,
+                                color: Color(0xff707070)),
+                            onPressed: () {
+                              return null;
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    //is pory ko bhi baad main widget bnana hy tek hy na
+                    //ok h
+                    Container(
+                      height: 260,
+                      width: MediaQuery.of(context).size.width,
+                      child: ListView.builder(
+                          itemCount: _.newArivalList.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (ctx, i) {
+                            return InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ProductDetails(
+                                                product: products[i],
+                                              )));
+                                },
+                                child: ItemCardMain(
+                                  description: "abc des",
+                                  imgPath: "assets/images/bag_1.png",
+                                  name: _.newArivalList[i].title,
+                                  price: "100",
+                                  rating: 2,
+                                ));
+                          }),
+                    ),
+                  ])));
+        });
   }
 }

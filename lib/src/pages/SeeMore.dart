@@ -1,6 +1,6 @@
 // import 'package:karobar/main.dart';
 import 'package:flutter/material.dart';
-import 'package:karobar/src/models/User.dart';
+import 'package:karobar/src/models/product_model.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class SeeMore extends StatefulWidget {

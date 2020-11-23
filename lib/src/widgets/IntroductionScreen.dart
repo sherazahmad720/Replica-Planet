@@ -4,7 +4,7 @@ import 'package:lottie/lottie.dart';
 // import 'package:karobar/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:karobar/src/models/Data.dart';
+import 'package:karobar/src/models/slider_model.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
