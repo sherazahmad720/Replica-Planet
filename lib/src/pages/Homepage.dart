@@ -1,16 +1,16 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:karobar/main.dart';
+// import 'package:karobar/main.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:karobar/src/pages/SeeMore.dart';
-import 'package:karobar/src/widgets/CustomFieldSearch.dart';
-import 'package:karobar/src/widgets/CustomTextField.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+// import 'package:karobar/src/pages/SeeMore.dart';
+// import 'package:karobar/src/widgets/CustomFieldSearch.dart';
+// import 'package:karobar/src/widgets/CustomTextField.dart';
+// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:karobar/src/widgets/slider.dart';
 import 'package:karobar/src/models/User.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+// import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
-import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+// import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'ProductDetails.dart';
 
 class HomePage extends StatefulWidget {
@@ -105,10 +105,10 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Text(
                     "New Arrival",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, color: Color(0xff707070)),
                   ),
                   IconButton(
-                    icon: Icon(Icons.arrow_forward),
+                    icon: Icon(Icons.arrow_forward, color: Color(0xff707070)),
                     onPressed: () {
                       return null;
                     },
@@ -126,55 +126,53 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Container(
                     height: 300,
-                    width: 205,
+                    width: 330,
                     child: ListView.builder(
-                      itemCount: products.length,
+                      // reverse: true,
+                      // scrollDirection: Axis.horizontal,
+                      itemCount: 2,
                       itemBuilder: (ctx, i) {
                         return GestureDetector(
                           onTap: () {
-                            Get.to(ProductDetails(
-                                rating: rating.toString(),
-                                prodid: products[i].id.toString(),
-                                prodname: products[i].title,
-                                prodPrice: products[i].price.toString(),
-                                proddescription: products[i].description));
+                            // Get.to(ProductDetails(
+                            //     rating: rating.toString(),
+                            //     prodid: products[i].id.toString(),
+                            //     prodname: products[i].title,
+                            //     prodPrice: products[i].price.toString(),
+                            //     proddescription: products[i].description));
                           },
-                          child: Card(
-                            color: Color(0XFF3D81AF),
-                            elevation: 10.0,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height: 100,
-                                  width: 100,
-                                  child: Hero(
-                                      tag: '${products[i].id}',
-                                      child: Image.asset(products[i].image)),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 12),
-                                  child: Row(
+                          child: Container(
+                            width: 138,
+                            // height: 166,
+                            child: Card(
+                              color: Color(0XFF3D81AF),
+                              elevation: 10.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 114,
+                                    width: 138,
+                                    child: Hero(
+                                        tag: '${products[i].id}',
+                                        child: Image.asset(products[i].image)),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
                                         flex: 1,
-                                        child: Container(
-                                            height: 50,
-                                            width: 100,
-                                            child: Padding(
-                                              padding: EdgeInsets.only(top: 10),
-                                              child: Text(
-                                                  "${products[i].title}",
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                            )),
+                                        child: Padding(
+                                          padding: EdgeInsets.only(top: 10),
+                                          child: Text("${products[i].title}",
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
                                       ),
                                       Expanded(
                                         flex: 1,
@@ -196,49 +194,48 @@ class _HomePageState extends State<HomePage> {
                                       )
                                     ],
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8),
-                                  child: Text(
-                                    "${products[i].description}",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
+                                  SizedBox(
+                                    height: 10,
                                   ),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "\$${products[i].price}",
-                                      style: TextStyle(fontSize: 22),
+                                  Text(
+                                    "{products[i].description}",
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      // fontWeight: FontWeight.bold
                                     ),
-                                    Text(
-                                      "\$${products[i].price}",
-                                      style: TextStyle(
-                                          fontSize: 22,
-                                          decoration:
-                                              TextDecoration.lineThrough),
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.favorite),
-                                      onPressed: () {
-                                        return null;
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.shopping_cart_outlined),
-                                      onPressed: () {
-                                        return null;
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "\$${products[i].price}",
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      Text(
+                                        "\$${products[i].price}",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            decoration:
+                                                TextDecoration.lineThrough),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(Icons.favorite),
+                                        onPressed: () {
+                                          return null;
+                                        },
+                                      ),
+                                      IconButton(
+                                        icon:
+                                            Icon(Icons.shopping_cart_outlined),
+                                        onPressed: () {
+                                          return null;
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );

@@ -1,4 +1,4 @@
-import 'package:karobar/main.dart';
+// import 'package:karobar/main.dart';
 import 'package:flutter/material.dart';
 
 class Product {

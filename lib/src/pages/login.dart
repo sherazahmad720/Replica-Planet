@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:karobar/main.dart';
+// import 'package:karobar/main.dart';
 import 'package:karobar/src/widgets/custom_paint.dart';
-import 'dart:ui' as ui;
+// import 'dart:ui' as ui;
 import 'package:karobar/src/widgets/CustomTextField.dart';
 import 'package:karobar/src/widgets/EmailValidator.dart';
 import 'package:karobar/src/widgets/FilledButton.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:async/src/';
 
 // ya folder lib k andr he rkhny hty  ya bahir ?sai hen yeh ok

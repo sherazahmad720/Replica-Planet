@@ -1,7 +1,7 @@
-import 'package:karobar/main.dart';
-import 'package:karobar/src/widgets/EmailValidator.dart';
+// import 'package:karobar/main.dart';
+// import 'package:karobar/src/widgets/EmailValidator.dart';
 
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
 String emailValidator(String value) {
   Pattern pattern =

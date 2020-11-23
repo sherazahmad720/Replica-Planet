@@ -1,7 +1,7 @@
 import 'package:karobar/src/pages/login.dart';
 import 'package:lottie/lottie.dart';
 
-import 'package:karobar/main.dart';
+// import 'package:karobar/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:karobar/src/models/Data.dart';
@@ -62,7 +62,6 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     mySLides = getSlides();
     controller = new PageController();
@@ -180,6 +179,7 @@ class _HomeState extends State<Home> {
   }
 }
 
+// ignore: must_be_immutable
 class SlideTile extends StatelessWidget {
   String imagePath, title, desc;
   Color color;

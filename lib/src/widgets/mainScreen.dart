@@ -1,18 +1,17 @@
-import 'package:karobar/main.dart';
+// import 'package:karobar/main.dart';
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:karobar/src/pages/Homepage.dart';
 
-class BottomNav extends StatefulWidget {
+class MainScreen extends StatefulWidget {
   @override
-  _BottomNavState createState() => _BottomNavState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _BottomNavState extends State<BottomNav> {
+class _MainScreenState extends State<MainScreen> {
   int currentIndex;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     currentIndex = 0;
   }

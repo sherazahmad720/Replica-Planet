@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_options.dart';
+// import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_carousel_slider/carousel_slider.dart';
@@ -30,7 +30,7 @@ class _BannersState extends State<Banners> {
     "G",
   ];
 
-  bool _isPlaying = false;
+  bool _isPlaying = true;
   GlobalKey<CarouselSliderState> _sliderKey = GlobalKey();
   @override
   Widget build(BuildContext context) {

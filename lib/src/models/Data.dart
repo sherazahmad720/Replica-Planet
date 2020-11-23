@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:karobar/main.dart';
+// import 'package:karobar/main.dart';
 
 class SliderModel {
   String imageAssetPath;

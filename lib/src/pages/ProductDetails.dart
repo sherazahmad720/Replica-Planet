@@ -1,8 +1,9 @@
-import 'package:karobar/main.dart';
-import 'Homepage.dart';
+// import 'package:karobar/main.dart';
+// import 'Homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:karobar/src/widgets/slider.dart';
 
+// ignore: must_be_immutable
 class ProductDetails extends StatefulWidget {
   String rating, prodid, prodname, prodPrice, proddescription;
   ProductDetails(
