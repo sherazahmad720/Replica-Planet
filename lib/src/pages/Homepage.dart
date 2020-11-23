@@ -57,37 +57,89 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 15,
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        height: 100,
-                        width: 100,
-                        child: ListView.builder(
-                          itemCount: products.length,
-                          itemBuilder: (ctx, i) {
-                            return Container(
-                              width: 20,
-                              height: 20,
-                              child: Text('${products[i].title}'),
-                              // decoration: BoxDecoration(
-                              //     image: DecorationImage(
-                              //         image: NetworkImage(
-                              //             "${products[i].image}"))),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            Center(
+              child: Text(
+                "Categories",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
             ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: 200,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                itemCount: products.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (ctx, i) {
+                  return Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          child: Container(
+                            color: Colors.blue,
+                            height: 200,
+                            width: 200,
+                          ),
+                        ),
+                        Positioned(
+                          top: 120,
+                          left: 4,
+                          right: 0,
+                          bottom: 0,
+                          child: Text(
+                            products[i].title,
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Positioned(
+                          top: 155,
+                          left: 30,
+                          right: 0,
+                          bottom: 0,
+                          child: Text("Shop now"),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            // Column(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   children: [
+            //     Padding(
+            //       padding: EdgeInsets.symmetric(horizontal: 20),
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Container(
+            //             height: 100,
+            //             width: 100,
+            //             child: ListView.builder(
+            //               itemCount: products.length,
+            //               itemBuilder: (ctx, i) {
+            //                 return Container(
+            //                   width: 20,
+            //                   height: 20,
+            //                   child: Text('${products[i].title}'),
+            //                   // decoration: BoxDecoration(
+            //                   //     image: DecorationImage(
+            //                   //         image: NetworkImage(
+            //                   //             "${products[i].image}"))),
+            //                 );
+            //               },
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ],
+            // ),
             SizedBox(
               height: 20,
             ),
@@ -119,15 +171,16 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 20,
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 0),
-              child: Container(
-                height: 300,
-                width: 200,
-                child: ListView.builder(
-                  itemCount: products.length,
-                  itemBuilder: (ctx, i) {
-                    return GestureDetector(
+            Container(
+              height: 500,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                itemCount: products.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (ctx, i) {
+                  return Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: GestureDetector(
                       onTap: () {
                         Get.to(ProductDetails(
                             rating: rating.toString(),
@@ -136,108 +189,115 @@ class _HomePageState extends State<HomePage> {
                             prodPrice: products[i].price.toString(),
                             proddescription: products[i].description));
                       },
-                      child: Card(
-                        color: Color(0XFF3D81AF),
-                        elevation: 10.0,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 100,
-                              width: 100,
-                              child: Hero(
-                                  tag: '${products[i].id}',
-                                  child: Text('${products[i].title}')
-                                  // Image.asset(products[i].image),
-                                  ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 12),
-                              child: Row(
+                      child: Container(
+                        height: 100,
+                        width: 250,
+                        child: Card(
+                          color: Color(0XFF3D81AF),
+                          elevation: 10.0,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 100,
+                                width: 100,
+                                child: Hero(
+                                    tag: '${products[i].id}',
+                                    child: Text('${products[i].title}')
+                                    // Image.asset(products[i].image),
+                                    ),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 12),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                          height: 50,
+                                          width: 100,
+                                          child: Padding(
+                                            padding: EdgeInsets.only(top: 10),
+                                            child: Text("${products[i].title}",
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          )),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: SmoothStarRating(
+                                        rating: rating,
+                                        isReadOnly: false,
+                                        size: 15,
+                                        filledIconData: Icons.star,
+                                        halfFilledIconData: Icons.star_half,
+                                        defaultIconData: Icons.star_border,
+                                        starCount: 5,
+                                        allowHalfRating: true,
+                                        spacing: 2.0,
+                                        onRated: (value) {
+                                          print("rating value -> $value");
+                                          // print("rating value dd -> ${value.truncate()}");
+                                        },
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8),
+                                child: Text(
+                                  "${products[i].description}",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                        height: 50,
-                                        width: 100,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(top: 10),
-                                          child: Text("${products[i].title}",
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold)),
-                                        )),
+                                  Text(
+                                    "\$${products[i].price}",
+                                    style: TextStyle(fontSize: 22),
                                   ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: SmoothStarRating(
-                                      rating: rating,
-                                      isReadOnly: false,
-                                      size: 15,
-                                      filledIconData: Icons.star,
-                                      halfFilledIconData: Icons.star_half,
-                                      defaultIconData: Icons.star_border,
-                                      starCount: 5,
-                                      allowHalfRating: true,
-                                      spacing: 2.0,
-                                      onRated: (value) {
-                                        print("rating value -> $value");
-                                        // print("rating value dd -> ${value.truncate()}");
-                                      },
-                                    ),
-                                  )
+                                  Text(
+                                    "\$${products[i].price}",
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        decoration: TextDecoration.lineThrough),
+                                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.favorite),
+                                    onPressed: () {
+                                      return null;
+                                    },
+                                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.shopping_cart_outlined),
+                                    onPressed: () {
+                                      return null;
+                                    },
+                                  ),
                                 ],
                               ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8),
-                              child: Text(
-                                "${products[i].description}",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "\$${products[i].price}",
-                                  style: TextStyle(fontSize: 22),
-                                ),
-                                Text(
-                                  "\$${products[i].price}",
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      decoration: TextDecoration.lineThrough),
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.favorite),
-                                  onPressed: () {
-                                    return null;
-                                  },
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.shopping_cart_outlined),
-                                  onPressed: () {
-                                    return null;
-                                  },
-                                ),
-                              ],
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
             ),
           ],

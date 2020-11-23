@@ -58,7 +58,7 @@ class _BottomNavState extends State<BottomNav> {
                 Icons.dashboard,
                 color: Colors.red,
               ),
-              title: Text("Home")),
+              title: Text("Products")),
           BubbleBottomBarItem(
               backgroundColor: Colors.deepPurple,
               icon: Icon(
@@ -69,7 +69,7 @@ class _BottomNavState extends State<BottomNav> {
                 Icons.access_time,
                 color: Colors.deepPurple,
               ),
-              title: Text("Logs")),
+              title: Text("Categories")),
           BubbleBottomBarItem(
               backgroundColor: Colors.indigo,
               icon: Icon(
