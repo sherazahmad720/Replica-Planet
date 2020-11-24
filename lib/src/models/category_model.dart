@@ -1,5 +1,6 @@
 class CategoryModel {
   String imgPath;
   String name;
-  CategoryModel({this.imgPath, this.name});
+  int CatId;
+  CategoryModel({this.imgPath, this.name, this.CatId});
 }

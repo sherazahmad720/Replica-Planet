@@ -8,9 +8,9 @@ class HomeController extends GetxController {
   //here is home page code
   List<SliderModel> bannerList = [];
   List<CategoryModel> categoryList = [
-    CategoryModel(imgPath: "assets/images/0.png", name: "Cat1"),
-    CategoryModel(imgPath: "assets/images/0.png", name: "Cat2"),
-    CategoryModel(imgPath: "assets/images/0.png", name: "Cat3")
+    CategoryModel(imgPath: "assets/images/0.png", name: "Cat1", CatId: 0),
+    CategoryModel(imgPath: "assets/images/0.png", name: "Cat2", CatId: 1),
+    CategoryModel(imgPath: "assets/images/0.png", name: "Cat3", CatId: 2)
   ];
   List<ProductModel> hoteSaleList = [
     ProductModel(

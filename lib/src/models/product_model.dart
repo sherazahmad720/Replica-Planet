@@ -2,18 +2,34 @@
 import 'package:flutter/material.dart';
 
 class ProductModel {
-  final String image, title, description;
-  final int price, size, id;
+  final String image,
+      title,
+      description,
+      prodComments,
+      onSaleProduct,
+      flatDiscount,
+      percentageDiscount;
+  final int price, size, id, prodDiscount, prodRating;
   final Color color;
-  ProductModel({
-    this.id,
-    this.image,
-    this.title,
-    this.price,
-    this.description,
-    this.size,
-    this.color,
-  });
+  List prodpic;
+  DateTime addingDate;
+
+  ProductModel(
+      {this.flatDiscount,
+      this.percentageDiscount,
+      this.addingDate,
+      this.color,
+      this.description,
+      this.id,
+      this.image,
+      this.onSaleProduct,
+      this.price,
+      this.prodComments,
+      this.prodDiscount,
+      this.prodRating,
+      this.prodpic,
+      this.size,
+      this.title});
 }
 
 List<ProductModel> products = [
