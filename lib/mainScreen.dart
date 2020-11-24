@@ -4,6 +4,7 @@ import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:karobar/src/pages/Homepage.dart';
 // import 'package:karobar/src/pages/Categories.dart';
 import 'package:karobar/src/pages/CategoryPage.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   int currentIndex;
   @override
   void initState() {
+    Firebase.initializeApp();
     super.initState();
     currentIndex = 0;
   }

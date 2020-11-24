@@ -30,7 +30,7 @@ class ItemCard extends StatelessWidget {
               // height: 180,
               // width: 160,
               decoration: BoxDecoration(
-                color: product.color,
+                // color: product.color,
                 borderRadius: BorderRadius.circular(16),
               ),
               // child: Hero(

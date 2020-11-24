@@ -31,7 +31,7 @@ class ItemCardMain extends StatelessWidget {
                     tag: '{products[i].id}',
                     child: Container(
                       decoration: BoxDecoration(
-                          image: DecorationImage(image: AssetImage(imgPath))),
+                          image: DecorationImage(image: NetworkImage(imgPath))),
                       height: 114,
                       width: 180,
                     ),
@@ -47,6 +47,7 @@ class ItemCardMain extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.only(top: 10),
                           child: Text("$name",
+                              maxLines: 1,
                               style: TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.bold)),
                         ),

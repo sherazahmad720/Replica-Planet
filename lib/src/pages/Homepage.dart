@@ -1,15 +1,19 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:karobar/src/controllers/home_controller.dart';
 import 'package:karobar/src/pages/ItemCard.dart';
+import 'package:karobar/src/widgets/featured_list_widget.dart';
 import 'package:karobar/src/widgets/item_card.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:karobar/src/widgets/slider.dart';
 import 'package:karobar/src/models/product_model.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'ProductDetails.dart';
+import 'package:karobar/src/widgets/FeatureHeading.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,13 +21,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  HomeController homeController = Get.put(HomeController());
   @override
-  // void initState() {
+  void initState() {
+    homeController.getCategoryList();
+    homeController.getNewArival();
+    super.initState();
+  }
 
-  // }
-  // HomeController homeC = Get.put(HomeController());
-  var rating = 3.0;
-  // String _search;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -31,15 +36,62 @@ class _HomePageState extends State<HomePage> {
         builder: (_) {
           return Scaffold(
               appBar: AppBar(
-                leading: Icon(Icons.access_time),
+                leading: GestureDetector(
+                    onTap: () {
+                      for (var i = 0; i <= _.categoryList.length; i++) {
+                        FirebaseFirestore.instance
+                            .collection("Product_Category")
+                            .add({
+                          'catId': _.categoryList[i].catId,
+                          'name': _.categoryList[i].name,
+                          'imgPath': _.categoryList[i].imgPath,
+                          //
+                        });
+                      }
+                    },
+                    child: Icon(Icons.access_time)),
                 backgroundColor: Colors.white,
                 actions: [
                   IconButton(
                     icon: Icon(Icons.search),
-                    onPressed: () {},
+                    onPressed: () {
+                      _.getHotSaleList();
+                      _.getCategoryList();
+                    },
                   ),
                   IconButton(
-                      onPressed: () {},
+                    icon: Icon(Icons.g_translate_outlined),
+                    onPressed: () {
+                      _.getCategoryList();
+                    },
+                  ),
+                  IconButton(
+                      onPressed: () async {
+                        for (var i = 0; i <= _.allproducts.length; i++) {
+                          FirebaseFirestore.instance
+                              .collection("Products")
+                              .add({
+                            'id': _.allproducts[i].id,
+                            'title': _.allproducts[i].title,
+                            "price": _.allproducts[i].price,
+                            "size": _.allproducts[i].size,
+                            "description": _.allproducts[i].description,
+                            "category": _.allproducts[i].category,
+                            "featurePhoto": _.allproducts[i].featurePhoto,
+                            "addingDate": _.allproducts[i].addingDate,
+                            "flatDiscount": _.allproducts[i].flatDiscount,
+                            "onSaleProduct": _.allproducts[i].onSaleProduct,
+                            "percentageDiscount":
+                                _.allproducts[i].percentageDiscount,
+                            "prodComments": _.allproducts[i].prodComments,
+                            "totalRating": _.allproducts[i].totalRating,
+                            "prodRating": _.allproducts[i].prodRating,
+                            "prodpic": _.allproducts[i].prodpic,
+                            "color": _.allproducts[i].color.toString(),
+                          });
+                          print('uploaded');
+                        }
+                      },
                       icon: FaIcon(FontAwesomeIcons.shoppingCart))
                 ],
               ),
@@ -47,17 +99,6 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                    //whatsapp bhi check kar leta banda
-                    // Padding(
-                    //     padding: EdgeInsets.only(top: 10),
-                    //     child: CustomTextFieldSearch(
-                    //       onSaved: (input) {
-                    //         _search = input;
-                    //       },
-                    //       icon: Icon(Icons.email),
-                    //       hint: "Search",
-                    //       prefixicon: Icon(Icons.access_alarm),
-                    //     )),
                     SizedBox(
                       height: 15,
                     ),
@@ -79,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                       height: 200,
                       width: MediaQuery.of(context).size.width,
                       child: ListView.builder(
-                        itemCount: _.categoryList.length,
+                        itemCount: _.productCategory.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (ctx, i) {
                           return Padding(
@@ -88,12 +129,11 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Positioned(
                                   child: Container(
-                                    //whats app p bhi dehan do zara
                                     decoration: BoxDecoration(
                                         color: Colors.blue,
                                         image: DecorationImage(
-                                            image: AssetImage(
-                                                "assets/images/bag_1.png"))),
+                                            image: NetworkImage(
+                                                "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"))),
                                     height: 200,
                                     width: 200,
                                   ),
@@ -104,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                                   right: 0,
                                   bottom: 0,
                                   child: Text(
-                                    _.categoryList[i].name,
+                                    _.productCategory[i].name,
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
@@ -123,7 +163,6 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ),
-
                     SizedBox(
                       height: 10,
                     ),
@@ -132,111 +171,47 @@ class _HomePageState extends State<HomePage> {
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Hot Sale",
-                            style: TextStyle(
-                                fontSize: 20, color: Color(0xff707070)),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.arrow_forward,
-                                color: Color(0xff707070)),
-                            onPressed: () {
-                              return null;
-                            },
-                          )
-                        ],
-                      ),
+                    FeatureHeading(
+                      Heading: "Hot Sale",
+                      Path: ProductDetails,
                     ),
                     SizedBox(
                       height: 5,
                     ),
-                    //is pory ko bhi baad main widget bnana hy tek hy na
-                    //ok h
-                    Container(
-                      height: 260,
-                      width: MediaQuery.of(context).size.width,
-                      child: ListView.builder(
-                          itemCount: _.hoteSaleList.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (ctx, i) {
-                            return InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) => ProductDetails(
-                                  //               product: products[i],
-                                  //             )));
-                                },
-                                child: ItemCardMain(
-                                  description: "abc des",
-                                  imgPath: "assets/images/bag_1.png",
-                                  name: _.hoteSaleList[i].title,
-                                  price: "100",
-                                  rating: 2,
-                                ));
-                          }),
+                    FeatureListWidget(
+                      navigationPath: ProductDetails,
+                      products: _.newArivalList,
                     ),
                     SizedBox(
                       height: 5,
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "New Arrival",
-                            style: TextStyle(
-                                fontSize: 20, color: Color(0xff707070)),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.arrow_forward,
-                                color: Color(0xff707070)),
-                            onPressed: () {
-                              return null;
-                            },
-                          )
-                        ],
-                      ),
+                    FeatureHeading(
+                      Heading: "Recmonded",
+                      Path: ProductDetails,
                     ),
                     SizedBox(
                       height: 5,
                     ),
-                    //is pory ko bhi baad main widget bnana hy tek hy na
-                    //ok h
-                    Container(
-                      height: 260,
-                      width: MediaQuery.of(context).size.width,
-                      child: ListView.builder(
-                          itemCount: _.newArivalList.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (ctx, i) {
-                            return InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ProductDetails(
-                                                product: products[i],
-                                              )));
-                                },
-                                child: ItemCardMain(
-                                  description: "abc des",
-                                  imgPath: "assets/images/bag_1.png",
-                                  name: _.newArivalList[i].title,
-                                  price: "100",
-                                  rating: 2,
-                                ));
-                          }),
+                    FeatureListWidget(
+                      navigationPath: ProductDetails,
+                      products: _.newArivalList,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    FeatureHeading(
+                      Heading: "New Arrival",
+                      Path: ProductDetails,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    FeatureListWidget(
+                      navigationPath: ProductDetails,
+                      products: _.newArivalList,
+                    ),
+                    SizedBox(
+                      height: 20,
                     ),
                   ])));
         });
