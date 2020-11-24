@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "35571577555",
+    "firebase_url": "https://bestopes-e-commerce-app.firebaseio.com",
+    "project_id": "bestopes-e-commerce-app",
+    "storage_bucket": "bestopes-e-commerce-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35571577555:android:b413c985fc35bbbddd5a26",
+        "android_client_info": {
+          "package_name": "com.sherazi.bestope"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35571577555-hi3u0e28ic0mgsfb5cvb846kj9fs7aa8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrOv6cGls0sUAAwarjR2bXY6W_KkeOvqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35571577555-hi3u0e28ic0mgsfb5cvb846kj9fs7aa8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
