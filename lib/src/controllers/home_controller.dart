@@ -10,11 +10,83 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class HomeController extends GetxController {
   //here is home page code
   List<SliderModel> bannerList = [];
-  List<CategoryModel> categoryList = [
-    CategoryModel(imgPath: "assets/images/0.png", name: "Cat2", catId: 1),
-    CategoryModel(imgPath: "assets/images/0.png", name: "Cat3", catId: 2),
-    CategoryModel(imgPath: "assets/images/0.png", name: "Cat1", catId: 0),
-  ];
+
+  List<ProductModel> newArivalList = [];
+  List<CategoryModel> allCategoryList = [];
+  List<CategoryModel> featuredCategoryList = [];
+  List<ProductModel> sortedproduct = [];
+
+  getBanerList() {}
+  Future<void> categoryproductlist() async {
+    FirebaseFirestore.instance.collection("Products").get().then((qssShot) {
+      sortedproduct.clear();
+      sortedproduct = qssShot.docs
+          .map((doc) => ProductModel(
+              title: doc.data()['title'],
+              description: doc.data()['description'],
+              price: doc.data()['price'],
+              totalRating: doc.data()['totalRating'],
+              prodRating: doc.data()['productRating'],
+              featurePhoto: doc.data()['featurePhoto']))
+          .toList();
+    });
+    update();
+  }
+
+  Future<void> getAllCategoryList() async {
+    FirebaseFirestore.instance
+        .collection("ProductCategory")
+        .get()
+        .then((qsShot) {
+      allCategoryList.clear();
+      allCategoryList = qsShot.docs
+          .map((doc) => CategoryModel(
+                catId: doc.data()['catId'],
+                name: doc.data()['name'],
+                imgPath: doc.data()['imgPath'],
+              ))
+          .toList();
+    });
+    update();
+  }
+
+  Future<void> getFeaturedCategoryList() async {
+    FirebaseFirestore.instance
+        .collection("ProductCategory")
+        .limit(4)
+        .get()
+        .then((qsShot) {
+      featuredCategoryList.clear();
+      featuredCategoryList = qsShot.docs
+          .map((doc) => CategoryModel(
+                catId: doc.data()['catId'],
+                name: doc.data()['name'],
+                imgPath: doc.data()['imgPath'],
+              ))
+          .toList();
+    });
+    update();
+  }
+
+  Future<void> getHotSaleList() async {
+    FirebaseFirestore.instance.collection("Products").get().then((qShot) {
+      newArivalList.clear();
+      newArivalList = qShot.docs
+          .map((doc) => ProductModel(
+              title: doc.data()['title'],
+              description: doc.data()['description'],
+              price: doc.data()['price'],
+              totalRating: doc.data()['totalRating'],
+              prodRating: doc.data()['productRating'],
+              featurePhoto: doc.data()['featurePhoto']))
+          .toList();
+    });
+    update();
+    print(newArivalList);
+  }
+
+  getNewArival() {}
+  //temp code here
   List<ProductModel> hoteSaleList = [
     ProductModel(
         id: "1",
@@ -58,48 +130,24 @@ class HomeController extends GetxController {
       color: [Colors.black, Colors.red, Colors.yellow],
     ),
   ];
-  List<ProductModel> newArivalList = [];
 
-//ab karo
-  List<CategoryModel> productCategory = [];
-//yeh q likh rhi ho
-  getBanerList() {}
-  Future<void> getCategoryList() async {
-    FirebaseFirestore.instance
-        .collection("Product_Category")
-        .get()
-        .then((value) {
-      productCategory.clear();
-      productCategory = value.docs.map((doc) {
-        CategoryModel(
-          catId: doc.data()['id'],
-          name: doc.data()['CatName'],
-          imgPath: doc.data()['CatPic'],
-        );
-      }).toList();
-    });
-    update(); //check whatsapp
-  }
-
-  Future<void> getHotSaleList() async {
-    FirebaseFirestore.instance.collection("Products").get().then((qShot) {
-      newArivalList.clear();
-      newArivalList = qShot.docs
-          .map((doc) => ProductModel(
-              title: doc.data()['title'],
-              description: doc.data()['description'],
-              price: doc.data()['price'],
-              totalRating: doc.data()['totalRating'],
-              prodRating: doc.data()['productRating'],
-              featurePhoto: doc.data()['featurePhoto']))
-          .toList();
-    });
-    update();
-    print(newArivalList);
-  }
-
-  getNewArival() {}
-  //temp code here
+  //for data adding
+  List<CategoryModel> categoryListForDataAdding = [
+    CategoryModel(
+        imgPath: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        name: "Cat2",
+        catId: "1"),
+    CategoryModel(
+        imgPath:
+            "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+        name: "Cat3",
+        catId: "2"),
+    CategoryModel(
+        imgPath:
+            "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+        name: "Cat1",
+        catId: "0"),
+  ];
   List<ProductModel> allproducts = [
     ProductModel(
       id: "1",

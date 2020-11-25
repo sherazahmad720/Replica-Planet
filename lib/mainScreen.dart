@@ -1,9 +1,11 @@
 // import 'package:karobar/main.dart';
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:get/get.dart';
+import 'package:karobar/src/controllers/home_controller.dart';
 import 'package:karobar/src/pages/Homepage.dart';
 // import 'package:karobar/src/pages/Categories.dart';
-import 'package:karobar/src/pages/CategoryPage.dart';
+import 'package:karobar/src/pages/CategoryPae.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class MainScreen extends StatefulWidget {
@@ -12,9 +14,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final HomeController homeController = Get.put(HomeController());
   int currentIndex;
   @override
   void initState() {
+    // initGet();
     Firebase.initializeApp();
     super.initState();
     currentIndex = 0;
@@ -32,6 +36,11 @@ class _MainScreenState extends State<MainScreen> {
     Text("2"),
     Text("2"),
   ];
+  initGet() async {
+    // await homeController.getCategoryList();
+    // await homeController.getHotSaleList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

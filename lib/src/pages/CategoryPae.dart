@@ -6,6 +6,7 @@ import 'package:karobar/src/models/product_model.dart';
 import 'package:karobar/src/pages/ProductDetails.dart';
 import 'package:karobar/src/pages/ItemCard.dart';
 
+// ya alreadt bna h categroy page
 const kTextColor = Color(0xFF535353);
 const kTextLightColor = Color(0xFFACACAC);
 

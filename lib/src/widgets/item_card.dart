@@ -27,14 +27,11 @@ class ItemCardMain extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Hero(
-                    tag: '{products[i].id}',
-                    child: Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(image: NetworkImage(imgPath))),
-                      height: 114,
-                      width: 180,
-                    ),
+                  Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(image: NetworkImage(imgPath))),
+                    height: 114,
+                    width: 180,
                   ),
                   SizedBox(
                     height: 5,
@@ -77,9 +74,12 @@ class ItemCardMain extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Container(
+                      Expanded(
+                        flex: 1,
                         child: Text(
-                          "$description",
+                          ("$description" as String).length > 100
+                              ? "${description.substring(0, 30)}...."
+                              : "$description",
                           maxLines: 1,
                           textAlign: TextAlign.left,
                           style: TextStyle(

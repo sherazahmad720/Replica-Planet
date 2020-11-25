@@ -3,15 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:karobar/src/controllers/home_controller.dart';
-import 'package:karobar/src/pages/ItemCard.dart';
-import 'package:karobar/src/widgets/featured_list_widget.dart';
-import 'package:karobar/src/widgets/item_card.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:karobar/src/widgets/slider.dart';
-import 'package:karobar/src/models/product_model.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:karobar/src/pages/category_page.dart';
 
+import 'package:karobar/src/widgets/featured_list_widget.dart';
+
+import 'package:karobar/src/widgets/slider.dart';
+
+import 'package:karobar/src/widgets/FeatureCategory.dart';
 import 'ProductDetails.dart';
 import 'package:karobar/src/widgets/FeatureHeading.dart';
 
@@ -21,30 +19,42 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  HomeController homeController = Get.put(HomeController());
+  final HomeController homeController = Get.put(HomeController());
   @override
   void initState() {
-    homeController.getCategoryList();
-    homeController.getNewArival();
     super.initState();
+    //idhr hi hon init satate dekh rha hon ok
+    homeController.getFeaturedCategoryList();
+    homeController.getHotSaleList();
   }
 
+//yar splach screen sy initilize karwa len gy abi choro us ko next working kary
+//next kyaaa
+//baqi pages4
+//kn sa ab acha mai btat hu
+//yaha upr categroy name  show hngy or jb click kry gy aik category py to us sy related sari post show hjy gi
   @override
   Widget build(BuildContext context) {
+    // homeController.getCategoryList();
+    // homeController.getHotSaleList();
     return GetBuilder<HomeController>(
         init: HomeController(),
         builder: (_) {
+          // homeController.getCategoryList();
+          // homeController.getHotSaleList();
           return Scaffold(
               appBar: AppBar(
                 leading: GestureDetector(
                     onTap: () {
-                      for (var i = 0; i <= _.categoryList.length; i++) {
+                      for (var i = 0;
+                          i <= _.categoryListForDataAdding.length;
+                          i++) {
                         FirebaseFirestore.instance
-                            .collection("Product_Category")
+                            .collection("ProductCategory")
                             .add({
-                          'catId': _.categoryList[i].catId,
-                          'name': _.categoryList[i].name,
-                          'imgPath': _.categoryList[i].imgPath,
+                          'catId': _.categoryListForDataAdding[i].catId,
+                          'name': _.categoryListForDataAdding[i].name,
+                          'imgPath': _.categoryListForDataAdding[i].imgPath,
                           //
                         });
                       }
@@ -56,13 +66,13 @@ class _HomePageState extends State<HomePage> {
                     icon: Icon(Icons.search),
                     onPressed: () {
                       _.getHotSaleList();
-                      _.getCategoryList();
+                      _.getFeaturedCategoryList();
                     },
                   ),
                   IconButton(
                     icon: Icon(Icons.g_translate_outlined),
                     onPressed: () {
-                      _.getCategoryList();
+                      _.getFeaturedCategoryList();
                     },
                   ),
                   IconButton(
@@ -106,70 +116,136 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       height: 15,
                     ),
-                    Center(
+                    FeatureHeading(
+                      Heading: "Categories",
+                      Path: ProductDetails,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    FeatureCategory(
+                      category: _.featuredCategoryList,
+                    ),
+
+                    // Padding(
+                    //   padding: EdgeInsets.all(20),
+                    //   child: Container(
+                    //     height: 200,
+                    //     width: MediaQuery.of(context).size.width,
+                    //     decoration: BoxDecoration(color: Colors.blue),
+                    //     child: ListView.builder(
+                    //       itemCount: _.categoryList.length,
+                    //       scrollDirection: Axis.horizontal,
+                    //       itemBuilder: (ctx, i) {
+                    //         return Padding(
+                    //           padding: EdgeInsets.only(left: 10),
+                    //           child: Stack(
+                    //             children: [
+                    //               Positioned(
+                    //                 child: Container(
+                    //                   height: 200,
+                    //                   width: MediaQuery.of(context).size.width,
+                    //                   decoration: BoxDecoration(
+                    //                     image: DecorationImage(
+                    //                         image: NetworkImage(
+                    //                       _.categoryList[i].imgPath,
+                    //                     )),
+                    //                   ),
+                    //                 ),
+                    //               ),
+                    //               Positioned(
+                    //                 top: 30,
+                    //                 child: Container(
+                    //                     height: 30,
+                    //                     width: 50,
+                    //                     child: Text(
+                    //                       _.categoryList[i].name,
+                    //                       style: TextStyle(fontSize: 20),
+                    //                     )),
+                    //               ),
+                    //               Positioned(
+                    //                 top: 80,
+                    //                 left: 0,
+                    //                 child: Container(
+                    //                     height: 50,
+                    //                     width: 130,
+                    //                     decoration: BoxDecoration(
+                    //                         color: Colors.yellow,
+                    //                         borderRadius:
+                    //                             BorderRadius.circular(20)),
+                    //                     child: Text(
+                    //                       "ShopNow",
+                    //                       style: TextStyle(fontSize: 20),
+                    //                     )),
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         );
+                    //       },
+                    //     ),
+                    //   ),
+                    // ),
+                    // Container(
+                    //   height: 200,
+                    //   width: MediaQuery.of(context).size.width,
+                    //   child: ListView.builder(
+                    //     itemCount: _.categoryList.length,
+                    //     scrollDirection: Axis.horizontal,
+                    //     itemBuilder: (ctx, i) {
+                    //       return Padding(
+                    //         padding: EdgeInsets.only(left: 20),
+                    //         child: Stack(
+                    //           children: [
+                    //             // Positioned(
+                    //             //   child: Container(
+                    //             //     decoration: BoxDecoration(
+                    //             //         color: Colors.blue,
+                    //             //         image: DecorationImage(
+                    //             //             image: NetworkImage(
+                    //             //                 "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"))),
+                    //             //     height: 200,
+                    //             //     width: 200,
+                    //             //   ),
+                    //             // ),
+                    //             Positioned(
+                    //               top: 120,
+                    //               left: 4,
+                    //               right: 0,
+                    //               bottom: 0,
+                    //               child: Text(
+                    //                 _.categoryList[i].name,
+                    //                 style: TextStyle(
+                    //                     fontSize: 20,
+                    //                     fontWeight: FontWeight.bold),
+                    //               ),
+                    //             ),
+                    //             Positioned(
+                    //               top: 155,
+                    //               left: 30,
+                    //               right: 0,
+                    //               bottom: 0,
+                    //               child: Text("Shop now"),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        _
+                            .getAllCategoryList()
+                            .then((value) => Get.to(CategoryPage()));
+                      },
                       child: Text(
-                        "Categories",
+                        "See More",
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 200,
-                      width: MediaQuery.of(context).size.width,
-                      child: ListView.builder(
-                        itemCount: _.productCategory.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (ctx, i) {
-                          return Padding(
-                            padding: EdgeInsets.only(left: 20),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        image: DecorationImage(
-                                            image: NetworkImage(
-                                                "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"))),
-                                    height: 200,
-                                    width: 200,
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 120,
-                                  left: 4,
-                                  right: 0,
-                                  bottom: 0,
-                                  child: Text(
-                                    _.productCategory[i].name,
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 155,
-                                  left: 30,
-                                  right: 0,
-                                  bottom: 0,
-                                  child: Text("Shop now"),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "See More",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                     FeatureHeading(
                       Heading: "Hot Sale",
