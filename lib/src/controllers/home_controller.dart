@@ -14,13 +14,17 @@ class HomeController extends GetxController {
   List<ProductModel> newArivalList = [];
   List<CategoryModel> allCategoryList = [];
   List<CategoryModel> featuredCategoryList = [];
-  List<ProductModel> sortedproduct = [];
+  List<ProductModel> sortedproductList = [];
 
   getBanerList() {}
-  Future<void> categoryproductlist() async {
-    FirebaseFirestore.instance.collection("Products").get().then((qssShot) {
-      sortedproduct.clear();
-      sortedproduct = qssShot.docs
+  Future<void> getSortedProductList(String categroy) async {
+    FirebaseFirestore.instance
+        .collection("Products")
+        .where('category', isEqualTo: categroy)
+        .get()
+        .then((qssShot) {
+      sortedproductList.clear();
+      sortedproductList = qssShot.docs
           .map((doc) => ProductModel(
               title: doc.data()['title'],
               description: doc.data()['description'],

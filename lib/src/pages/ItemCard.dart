@@ -6,6 +6,7 @@ const kTextLightColor = Color(0xFFACACAC);
 
 const kDefaultPaddin = 20.0;
 
+//ya product details valy page h h js maid etails h products ki
 class ItemCard extends StatelessWidget {
   final ProductModel product;
   final Function press;
